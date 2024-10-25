@@ -177,7 +177,7 @@ class VyDevice:
 
             status = resp.status_code
 
-        except requests.exceptions.ConnectionError | json.JSONDecodeError as e:
+        except (requests.exceptions.ConnectionError, json.JSONDecodeError) as e:
             error = 'Error: ' + str(e)
             status = 0
 
