@@ -141,9 +141,8 @@ class VyDevice:
         }
 
         return payload
-
         
-        def _api_request(self, command, op, path=[], method='POST', file=None, url=None, name=None):
+    def _api_request(self, command, op, path=[], method='POST', file=None, url=None, name=None):
         """
         Make an API request.
 
@@ -161,6 +160,7 @@ class VyDevice:
         """
         url = self._get_url(command)
         payload = self._get_payload(op, path=path, file=file, url=url, name=name)
+
         headers = {}
         error = False      
         result = {}
@@ -169,7 +169,7 @@ class VyDevice:
             resp = requests.post(url, verify=self.verify, data=payload, timeout=self.timeout, headers=headers)
             resp_decoded = resp.json()
 
-            if resp_decoded['success'] == True:
+            if resp_decoded['success']:
                 result = resp_decoded['data']
                 error = False
             else:
