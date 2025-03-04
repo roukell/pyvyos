@@ -183,7 +183,10 @@ class VyDevice:
             status = resp.status_code
 
         except (requests.exceptions.ConnectionError, json.JSONDecodeError) as e:
-            error = 'Error: ' + str(e)
+            error = f"""
+            Error: {str(e)}
+            Payload: {payload}
+            """
             status = 0
 
         # Removing apikey from payload for security reasons
